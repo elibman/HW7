@@ -128,7 +128,7 @@ def birthyear_nationality_search(age, country, cur, conn):
             name = row[1]
             tup_lst.append((name, nationality, birthyear))
     conn.commit()
-    print(tup_lst)
+    #print(tup_lst)
     return tup_lst
 
 ## [TASK 4]: 15 points
@@ -149,7 +149,27 @@ def birthyear_nationality_search(age, country, cur, conn):
     # HINT: You'll have to use JOIN for this task.
 
 def position_birth_search(position, age, cur, conn):
-       pass
+    cur.execute("SELECT * FROM Players")
+    players_data = cur.fetchall()
+    
+    cur.execute("SELECT * FROM Positions")
+    positions_data = cur.fetchall()
+    positions = {position_search[0]: position_search[1] for position_search in positions_data}
+    print(positions)
+    tup_lst = []
+    for row in players_data:
+        #print(nationality)
+        birthyear = row[3]
+        birth_age = 2023 - birthyear
+        name = row[1]
+        position_id = row[2]
+        position_name = positions[position_id]
+        if position_name == position and birth_age <= age:
+            tup_lst.append((name, position, birthyear))
+        
+    conn.commit()
+    print(tup_lst)
+    return tup_lst
 
 
 # [EXTRA CREDIT]
@@ -276,6 +296,7 @@ def main():
     make_players_table(json_data, cur, conn)
     nationality_search(['Spain', 'Brazil'], cur, conn)
     birthyear_nationality_search(19, 'England', cur, conn)
+    position_birth_search("Defense", 20, cur, conn)
     conn.close()
 
 
