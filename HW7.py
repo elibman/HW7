@@ -84,8 +84,13 @@ def make_players_table(data, cur, conn):
         # the player's name, their position_id, and their nationality.
 
 def nationality_search(countries, cur, conn):
-    pass
-
+    
+    cur.execute("SELECT * FROM Players")
+    players_data = cur.fetchall()
+    for row in players_data:
+        #print(row)
+        nationality = row[4]
+        print(nationality)
 ## [TASK 3]: 10 points
 # finish the function birthyear_nationality_search
 
@@ -243,11 +248,12 @@ def winners_since_search(year, cur, conn):
 def main():
 
     #### FEEL FREE TO USE THIS SPACE TO TEST OUT YOUR FUNCTIONS
-
+    
     json_data = read_data('football.json')
     cur, conn = open_database('Football.db')
     make_positions_table(json_data, cur, conn)
     make_players_table(json_data, cur, conn)
+    nationality_search(['Spain', 'Brazil'], cur, conn)
     conn.close()
 
 
