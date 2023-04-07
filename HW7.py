@@ -1,8 +1,8 @@
 
 # Your name: Emily Libman
-# Your student id: 
-# Your email:
-# List who you have worked with on this project:
+# Your student id: 34888074
+# Your email: elibman@umich.edu
+# List who you have worked with on this project: Julia Coffman, Raina Gebara, Kurt Holland
 
 import unittest
 import sqlite3
